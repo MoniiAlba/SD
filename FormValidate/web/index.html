@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<html>
+    <head>
+        <title>TODO supply a title</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    </head>
+    <body>
+        <h1>My first bulletproof form!</h1>
+        
+        <script>
+        function validateForm(){
+            x=document.forms["vForm"]["fName"].value;
+            if (x==null || x=="") {
+                alert("first name must be filled out");
+                return false;
+            }
+            x=document.forms["vForm"]["lName"].value;
+            if (x==null || x=="") {
+                alert("Last name must be filled out");
+                return false;
+            }
+            
+            x=document.forms["vForm"]["mail"].value;
+            if (x==null || x=="") {
+                alert("Email must be filled out");
+                return false;
+            }
+            if(x.indexOf("@") && x.indexOf(".")){
+                alert("Email must be valid");
+                return false;
+            }
+            
+            
+            x=document.forms["vForm"]["gender"];
+            if (!x[0].checked && !x[1].checked ) {
+                alert("Gender must be filled out");
+                return false;
+            }
+            
+            x=document.forms["vForm"]["country"].value;
+            if (x==null || x=="") {
+                alert("Country must be selected");
+                return false;
+            }
+            
+            x=document.forms["vForm"]["comments"].value;
+            if (x == "") {
+                alert("Comments must be filled out");
+                return false;
+            }
+            
+            return true;
+        }
+        
+        function hasNumber(myString) {
+            return /\d/.test(myString);
+         }
+         
+        function hasLowerCase(str) {
+            return (/[a-z]/.test(str));
+        }
+        
+        function checkName(){
+            var x=document.forms["vForm"]["fName"].value;
+            if (x==null || x=="") {
+                alert("First name must be filled out");
+                return false;
+            }else{
+                if(hasNumber(x)){
+                    alert("First name must not have numbers");
+                    return false;
+                }
+                
+                if(hasLowerCase(x)){
+                    alert("First name must be in capital letters");
+                    return false;
+                }
+            }
+        }
+        
+        function checkLastName(){
+            var x=document.forms["vForm"]["lName"].value;
+            if (x==null || x=="") {
+                alert("Last name must be filled out");
+                return false;
+            }else{
+                if(hasNumber(x)){
+                    alert("Last name must not have numbers");
+                    return false;
+                }
+                
+                if(hasLowerCase(x)){
+                    alert("Last name must be in capital letters");
+                    return false;
+                }
+            }
+        }
+    </script> 
+        <form name="vForm" action="" onsubmit="return validateForm()" >
+            <table border="1">
+                <thead>
+                    <tr>
+                        <th>Description</th>
+                        <th>Value</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>First Name</td>
+                        <td><input type="text" name="fName" value="" onKeyUp="checkName()" /></td>
+                    </tr>
+                    <tr>
+                        <td>Last Name</td>
+                        <td><input type="text" name="lName" value="" onKeyUp="checkLastName()"/></td>
+                    </tr>
+                    <tr>
+                        <td>Email</td>
+                        <td><input type="text" name="mail" value="" /></td>
+                    </tr>
+                    <tr>
+                        <td>Gender</td>
+                        <td>
+                            <input type="radio" name="gender" value="Male" /> Male<br>
+                            <input type="radio" name="gender" value="Female" /> Female
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Country Region</td>
+                        <td><select name="country">
+                                <option>Centro</option>
+                                <option>Sur</option>
+                            </select></td>
+                    </tr>
+                    <tr>
+                        <td>All the vacines?</td>
+                        <td><input type="checkbox" name="vacines" value="ON" /></td>
+                    </tr>
+                    <tr>
+                        <td>Additional Comments</td>
+                        <td>
+                            <textarea name="comments"></textarea>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td><input type="reset" value="Reset" /></td>
+                        <td><input type="submit" value="Send" /></td>
+                    </tr>
+                </tbody>
+            </table>
+
+        </form>
+    </body>
+</html>

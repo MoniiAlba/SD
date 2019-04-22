@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<html>
+    <head>
+        <title>TODO supply a title</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    </head>
+    <body>
+        
+        <script>
+            function callRESTfulWebService(id, method, target, msg){
+                var ajaxRequest;
+                if (window.XMLHttpRequest){
+                    ajaxRequest=new XMLHttpRequest(); // IE7+, Firefox, Chrome, Opera, Safari
+                } else {
+                    ajaxRequest=new ActiveXObject("Microsoft.XMLHTTP"); // IE6, IE5
+                }
+                ajaxRequest.onreadystatechange = function(){
+                if (ajaxRequest.readyState==4 &&
+                    (ajaxRequest.status==200 || ajaxRequest.status==204)){
+                    console.log(ajaxRequest);
+                    document.getElementById(id).innerHTML=ajaxRequest.response;
+                    }
+                }
+                target= target + "?origin=" + document.getElementById("selectOr").value + 
+                        "&target=" + document.getElementById("selectTar").value + 
+                        "&amount=" + document.getElementById("amount").value;
+                ajaxRequest.open(method, target, true /*async*/);
+                ajaxRequest.setRequestHeader("Content-Type", "text/html");
+                ajaxRequest.send(msg); 
+            }
+            
+            
+        </script>
+        
+        <div>Elige las unidades de moneda que desees convertir</div> 
+        
+        <form>
+            
+            <table border="1">
+                <thead>
+                    <tr>
+                        <th>Currency I have</th>
+                        <th>Amount</th>
+                        <th>Currency I want</th>
+                        <th>Amount</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><select id="selectOr" name="origin" onchange="callRESTfulWebService(
+                        'result',
+                        'GET',
+                        'http://localhost:8080/LabRest/webresources/converter',
+                        '')" >
+                                <option value="0">Pesos Mexicanos</option>
+                                <option value="1">Dólares estadounidenses</option>
+                                <option value="2">Dólares canadienses</option>
+                                <option value="3">Libra esterlina</option>
+                            </select></td>
+                            <td><input type="text" id="amount" name="iWant" value="" onchange="callRESTfulWebService(
+                        'result',
+                        'GET',
+                        'http://localhost:8080/LabRest/webresources/converter',
+                        '')"  /></td>
+                        <td><select id="selectTar" name="target" onchange="callRESTfulWebService(
+                        'result',
+                        'GET',
+                        'http://localhost:8080/LabRest/webresources/converter',
+                        '')" >
+                                <option value="0">Pesos Mexicanos</option>
+                                <option value="1">Dólares estadounidenses</option>
+                                <option value="2">Dólares canadienses</option>
+                                <option value="3">Libra esterlina</option>
+                            </select></td>
+                        <td id="result"></td>
+                    </tr>
+                </tbody>
+            </table>
+
+            
+            
+        </form>
+        
+        
+        
+    </body> 
+    
+    
+</html>

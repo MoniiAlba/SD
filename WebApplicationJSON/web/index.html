@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<html>
+    <head>
+        <title>TODO supply a title</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    </head>
+    <body>
+        <div id="salida">TODO write content</div>
+        
+        <script>
+            function loadContent(id, target){
+                var ajaxRequest;
+                if(window.XMLHttpRequest){
+                    ajaxRequest = new XMLHttpRequest();
+                }else{
+                    ajaxRequest = new ActiveXObject("Microsoft.XMLHTTP");
+                }
+                ajaxRequest.onreadystatechange = function(){
+                if (ajaxRequest.readyState==4 && ajaxRequest.status==200){
+                    var JSONObject = JSON.parse(ajaxRequest.responseText);
+                    alert(JSONObject);
+                    alert(JSONObject.algo1);
+                    var txt = "field1: " + JSONObject.algo1+" field2: "+ JSONObject.algo2+" field3: "+ JSONObject.algo3+"<br />";
+                    document.getElementById(id).innerHTML=txt;
+                    }
+                } 
+                
+                ajaxRequest.open("GET",target,true);
+                ajaxRequest.send();
+            }
+            
+            
+        </script>
+        <form>
+            <input type="button" value="Objeto JSON" onclick="loadContent('salida', 'ServletJSON')" />
+        </form>
+        
+    </body>
+</html>
